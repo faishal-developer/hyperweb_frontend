@@ -19,6 +19,7 @@ const useEditRecipe = (id) => {
   });
 
   useEffect(() => {
+    console.log(id, "id");
     if (!data?.data) return;
     const newData = { ...data?.data };
     newData.instructions = newData.instructions

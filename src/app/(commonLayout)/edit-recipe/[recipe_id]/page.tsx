@@ -4,7 +4,7 @@ import EditCreateRecipe from '../../../../components/editCreateRecipe/EditCreate
 import useEditRecipe from './editRecipe.logic';
 
 const EditRecipe = ({params}) => {
-    const {getLoader,recipeData,handleChange,handleSubmit}=useEditRecipe(params.id);
+    const {getLoader,recipeData,handleChange,handleSubmit}=useEditRecipe(params.recipe_id);
 
   if(getLoader)return "loading..."
   return (
