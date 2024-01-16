@@ -5,7 +5,7 @@ import EditDeleteBtn from "../../../../components/common/EditDeleteBtn";
 import { config } from "../../../../config/config";
 import { getRecipes } from "../../../../helper/commonFunctions";
 import { paths } from "../../../../paths/Paths";
-
+import {style} from '../recipe.tailwind'
 
 const RecipeDetails = async({params}) => {
 
@@ -20,32 +20,32 @@ const RecipeDetails = async({params}) => {
   return (
     <div>
       
-      <div className="container mx-auto p-8">
-        <div className="flex flex-col lg:flex-row items-center">
-          <div className="w-full max-h-96 lg:w-1/2 h-auto mb-8 lg:mb-0 lg:mr-8 rounded-lg object-cover">
+      <div className={style.cont2}>
+        <div className={style.flex_cont2}>
+          <div className={style.img_cont}>
             <div className="flex space-x-4 my-2">
               <EditDeleteBtn id={params.recipe_id}/>
             </div>
             <img
-              className="w-full max-h-96 h-auto mb-8 lg:mb-0 lg:mr-8 rounded-lg object-cover"
+              className={style.img_details}
               src={recipe.image}
               alt={`${recipe.title} Image`}
             />
           </div>
 
           <div className="lg:w-1/2">
-            <h1 className="text-4xl font-bold mb-4">{recipe.title}</h1>
-            <p className="text-gray-600 mb-4">{recipe.description}</p>
+            <h1 className={style.title_d}>{recipe.title}</h1>
+            <p className={style.desc}>{recipe.description}</p>
 
-            <h2 className="text-xl font-bold mb-2">Ingredients:</h2>
-            <ul className="list-disc list-inside mb-4">
+            <h2 className={style.incH}>Ingredients:</h2>
+            <ul className={style.inc_li}>
               {recipe.ingredients?.split(config.word_breaker)?.map((ingredient, index) => (
                 <li key={index}>{ingredient}</li>
               ))}
             </ul>
 
-            <h2 className="text-xl font-bold mb-2">Instructions:</h2>
-            <ol className="list-decimal list-inside">
+            <h2 className={style.ins}>Instructions:</h2>
+            <ol className={style.ins_li}>
               {recipe.instructions?.split(config.word_breaker).map((instruction, index) => (
                 <li key={index}>{instruction}</li>
               ))}
