@@ -8,4 +8,5 @@ export const api = createApi({
     // baseUrl: "http://localhost:5000",
   }),
   endpoints: () => ({}),
+  tagTypes: ["Recipe"],
 });

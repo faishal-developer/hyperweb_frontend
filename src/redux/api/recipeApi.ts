@@ -31,7 +31,7 @@ export const recipeApi = api.injectEndpoints({
           body: data,
         };
       },
-      providesTags: () => [{ type: "Recipe" }],
+      invalidatesTags: ["Recipe"],
     }),
     UpdateRecipe: builder.mutation({
       query: ({ data, id }: any) => {
