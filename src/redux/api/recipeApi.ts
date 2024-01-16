@@ -7,7 +7,6 @@ export const recipeApi = api.injectEndpoints({
   endpoints: (builder) => ({
     AddRecipe: builder.mutation({
       query: (data: any) => {
-        console.log("api", data);
         return {
           url: backendApiEndPoints.create_recipe,
           method: "POST",
@@ -18,7 +17,31 @@ export const recipeApi = api.injectEndpoints({
         };
       },
     }),
+    UpdateRecipe: builder.mutation({
+      query: ({ data, id }: any) => {
+        return {
+          url: backendApiEndPoints.recipe_details(id),
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: data,
+        };
+      },
+    }),
+    DeleteRecipe: builder.mutation({
+      query: (id: string) => {
+        return {
+          url: backendApiEndPoints.recipe_details(id),
+          method: "DELETE",
+        };
+      },
+    }),
   }),
 });
 
-export const { useAddRecipeMutation } = recipeApi;
+export const {
+  useAddRecipeMutation,
+  useDeleteRecipeMutation,
+  useUpdateRecipeMutation,
+} = recipeApi;

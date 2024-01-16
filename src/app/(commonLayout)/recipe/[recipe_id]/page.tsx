@@ -1,5 +1,7 @@
 // pages/recipes/[id].js
 
+import Button from "../../../../components/common/Button";
+import EditDeleteBtn from "../../../../components/common/EditDeleteBtn";
 import { config } from "../../../../config/config";
 import { getRecipes } from "../../../../helper/commonFunctions";
 import { paths } from "../../../../paths/Paths";
@@ -17,14 +19,19 @@ const RecipeDetails = async({params}) => {
 
   return (
     <div>
-
+      
       <div className="container mx-auto p-8">
         <div className="flex flex-col lg:flex-row items-center">
-          <img
-            className="w-full max-h-96 lg:w-1/2 h-auto mb-8 lg:mb-0 lg:mr-8 rounded-lg object-cover"
-            src={recipe.image}
-            alt={`${recipe.title} Image`}
-          />
+          <div className="w-full max-h-96 lg:w-1/2 h-auto mb-8 lg:mb-0 lg:mr-8 rounded-lg object-cover">
+            <div className="flex space-x-4 my-2">
+              <EditDeleteBtn id={params.recipe_id}/>
+            </div>
+            <img
+              className="w-full max-h-96 h-auto mb-8 lg:mb-0 lg:mr-8 rounded-lg object-cover"
+              src={recipe.image}
+              alt={`${recipe.title} Image`}
+            />
+          </div>
 
           <div className="lg:w-1/2">
             <h1 className="text-4xl font-bold mb-4">{recipe.title}</h1>
