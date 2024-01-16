@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { backendApiEndPoints } from "../../paths/apiEndPoints";
 import { api } from "./baseApi";
 
@@ -5,6 +6,20 @@ import { api } from "./baseApi";
 
 export const recipeApi = api.injectEndpoints({
   endpoints: (builder) => ({
+    getAllRecipe: builder.query({
+      query: (params: any) => ({
+        url: backendApiEndPoints.recipe,
+        method: "GET",
+        params,
+      }),
+      providesTags: ["Recipe"],
+    }),
+    getARecipe: builder.query({
+      query: (id: string) => ({
+        url: backendApiEndPoints.recipe_details(id),
+        method: "GET",
+      }),
+    }),
     AddRecipe: builder.mutation({
       query: (data: any) => {
         return {
@@ -16,6 +31,7 @@ export const recipeApi = api.injectEndpoints({
           body: data,
         };
       },
+      providesTags: () => [{ type: "Recipe" }],
     }),
     UpdateRecipe: builder.mutation({
       query: ({ data, id }: any) => {
@@ -28,6 +44,7 @@ export const recipeApi = api.injectEndpoints({
           body: data,
         };
       },
+      invalidatesTags: ["Recipe"],
     }),
     DeleteRecipe: builder.mutation({
       query: (id: string) => {
@@ -36,6 +53,7 @@ export const recipeApi = api.injectEndpoints({
           method: "DELETE",
         };
       },
+      invalidatesTags: ["Recipe"],
     }),
   }),
 });
@@ -44,4 +62,6 @@ export const {
   useAddRecipeMutation,
   useDeleteRecipeMutation,
   useUpdateRecipeMutation,
+  useGetAllRecipeQuery,
+  useGetARecipeQuery,
 } = recipeApi;

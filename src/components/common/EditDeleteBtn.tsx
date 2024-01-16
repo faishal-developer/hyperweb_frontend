@@ -5,16 +5,18 @@ import { useDeleteRecipeMutation } from '../../redux/api/recipeApi';
 import { useRouter } from 'next/navigation';
 import { paths } from '../../paths/Paths';
 import { ToastContainer, toast } from 'react-toastify';
+import Link from 'next/link';
 
 const EditDeleteBtn = ({id}) => {
     const router=useRouter();
     const [deleteFunc,{isLoading}]=useDeleteRecipeMutation()
 
-    const handleDelete=()=>{
+    const handleDelete=async()=>{
         try{
-            deleteFunc(id);
+            const res:any= await deleteFunc(id);
             router.push(paths.recipe)
-            toast.success("Item deleted succeessfully")
+            if(res?.data)toast.success("Item deleted succeessfully")
+            else toast.success("Something went wrong")
         }catch(e){
             toast.error("Something went wrong");
         }
@@ -23,8 +25,10 @@ const EditDeleteBtn = ({id}) => {
     return (
         <>
             <ToastContainer/>
-           <Button disabled={false} onClick={()=>{}} color="bg-blue-500 text-white">
-              Edit
+           <Button disabled={false} onClick={()=>{}} color="bg-blue-500 inline-block text-white">
+              <Link href={paths.recipe_update(id)} >
+                Edit
+              </Link>
             </Button>
             <Button disabled={isLoading} onClick={handleDelete} color="bg-red-500 text-white">
               {isLoading?'loading...':'Delete'}
